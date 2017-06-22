@@ -1,0 +1,15 @@
+{
+  "name": "pgn-parser",
+  "version": "0.0.0",
+  "description": "pgn parser",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "pegjs": "^0.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
+  }
+}
