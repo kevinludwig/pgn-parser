@@ -4,7 +4,6 @@
   "description": "pgn parser",
   "keywords": ["chess", "pgn", "parser", "pegjs"],
   "license": "MIT",
-  "files": ["index.js", "pgn-parser.js", "grammar.peg"],
   "repository": {
     "type": "git",
     "url": "https://github.com/kevinludwig/pgn-parser.git"
