@@ -1,10 +1,19 @@
 {
   "name": "pgn-parser",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "pgn parser",
+  "keywords": ["chess", "pgn", "parser", "pegjs"],
+  "license": "MIT",
+  "files": ["index.js", "pgn-parser.js", "grammar.peg"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinludwig/pgn-parser.git"
+  },
+  "engines": {"node": ">= 6.0.0"},
   "scripts": {
     "test": "mocha"
   },
+  "main": "index.js",
   "dependencies": {
     "pegjs": "^0.10.0"
   },
