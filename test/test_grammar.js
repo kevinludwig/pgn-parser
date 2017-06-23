@@ -1,12 +1,17 @@
 const chai = require('chai'),
       path = require('path'),
       fs = require('fs'),
-      pegjs = require('pegjs'),
+      pgnParser = require('../index'),
       should = chai.should();
 
 describe('grammar', () => {
-    const grammar = fs.readFileSync(path.join(__dirname, '../grammar.peg'), 'utf-8');
-    const parser = pegjs.generate(grammar);
+    let parser;
+    before((done) => {
+         pgnParser((err, p) => {
+            parser = p;
+            done();
+         });
+    });
 
     it('should parse basic movetext', () => {
         const [result] = parser.parse('1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qe3 Nf6 *');
