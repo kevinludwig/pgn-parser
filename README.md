@@ -1,5 +1,7 @@
 ### pgn-parser
 
+[![Build Status](https://travis-ci.org/kevinludwig/pgn-parser.svg?branch=master)](https://travis-ci.org/kevinludwig/pgn-parser)
+
 Parse [PGN files](https://www.chessclub.com/user/help/PGN-spec) into a JS data structure (and syntax validation on the PGN)
 
 ### Usage
