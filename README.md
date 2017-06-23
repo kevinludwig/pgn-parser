@@ -1,6 +1,6 @@
 ### pgn-parser
 
-Parse PGN files into a JS data structure (and syntax validation on the PGN)
+Parse [PGN files](https://www.chessclub.com/user/help/PGN-spec) into a JS data structure (and syntax validation on the PGN)
 
 ### Usage
 
@@ -31,20 +31,20 @@ The result parsing the PGN above would be
         },
         result: "*",
         moves: [
-            { m: 'e4', mn: 1, nags: [], ravs: [], com: null },
-            { m: 'e5', mn: null, nags: [], ravs: [], com: null},
-            { m: 'Nf3', mn: 2, nags: [], ravs: [], com: null},
-            { m: 'Nc6', mn: null, nags: [], ravs: [], com: null},
-            { m: 'Bc4', mn: 3, nags: [], ravs: [], com: null},
-            { m: 'Bc5', mn: null, nags: [], ravs: [{ mn: 3, m: "...Nf6", nags: [], ravs: [], com: "is the two knights"}], com: null},
-            { m: 'b4', mn: 4, nags: [], ravs: [], com: null},
-            { m: 'Bxb4', mn: null, nags: [], ravs: [], com: null},
-            { m: 'c3', mn: 5, nags: [], ravs: [], com: null},
-            { m: 'Ba5', mn: null, nags: [], ravs: [], com: null},
-            { m: 'd4', mn: 6, nags: [], ravs: [], com: null},
-            { m: 'exd4', mn: null, nags: [], ravs: [], com: null},
-            { m: 'O-O', mn: 7, mn: 7, nags: [], ravs: [], com: null},
-            { m: 'Nge7', mn: null, nags: ["$1"], ravs: [], com: null}
+            { move: 'e4', move_number: 1},
+            { move: 'e5',
+            { move: 'Nf3', move_number: 2},
+            { move: 'Nc6'},
+            { move: 'Bc4', move_number: 3},
+            { move: 'Bc5', ravs: [{ moves: [{move_number: 3, move: "...Nf6", comment: "is the two knights"}]}]},
+            { move: 'b4', move_number: 4},
+            { move: 'Bxb4'},
+            { move: 'c3', move_number: 5},
+            { move: 'Ba5'},
+            { move: 'd4', move_number: 6},
+            { move: 'exd4'},
+            { move: 'O-O', move_number: 7},
+            { move: 'Nge7', nags: ["$1"]}
         ]
     }
 ]

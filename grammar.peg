@@ -14,6 +14,21 @@
         m[hn] = hv;
         return m;
     }
+    function make_move(move_number, move, nags, ravs, comment) {
+        var m = {};
+        if (move_number) m.move_number = move_number;
+        if (move) m.move = move;
+        if (nags && nags.length) m.nags = nags;
+        if (ravs && ravs.length) m.ravs = ravs;
+        if (comment) m.comment = comment;
+        return m;
+    }
+    function make_rav(moves, result) {
+        return {
+            moves, 
+            result
+        };
+    }
     function make_game(h, c, m, r) {
         h = h || [];
         return {
@@ -82,9 +97,15 @@ move = mn:move_number?
        m:half_move 
        nags:(whitespace+ n:nag {return n})*
        com:(whitespace+ c2:comment {return c2})? 
-       ravs:(whitespace+ r:rav {return r})?
-       {return {mn, m, nags, ravs, com}}
+       ravs:(whitespace+ r:rav {return r})*
+       {return make_move(mn, m, nags, ravs, com)}
 
 movetext = first:move rest:(whitespace+ move)* {return first ? [first].concat(rest.map(function(m) {return m[1]})) : []}
 
-rav = "(" whitespace* m:movetext whitespace* ")" {return m}
+rav = "(" 
+    whitespace* 
+    m:movetext 
+    whitespace* 
+    r:result?
+    whitespace*
+    ")" {return make_rav(m, r)}

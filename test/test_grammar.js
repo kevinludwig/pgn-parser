@@ -102,6 +102,13 @@ describe('grammar', () => {
         const [result] = parser.parse('1. e4 (1. d4 d5) e5 2. d4 exd4 *');
         result.moves.should.have.lengthOf(4);
     });
+    
+    it('should allow multiple RAV for same move', () => {
+        const [result] = parser.parse('1. e4 (1. d4 d5) (1. c4 e5) e5 *');
+        result.moves.should.have.lengthOf(2);
+        result.moves[0].ravs.should.have.lengthOf(2);
+    });
+
 
     it('should allow half move at end', () => {
         const [result] = parser.parse('1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O d6 6. Re1 1-0');
