@@ -109,6 +109,11 @@ describe('grammar', () => {
         result.moves[0].ravs.should.have.lengthOf(2);
     });
 
+    it('should allow 4...exd4 syntax', () => {
+        const [result] = parser.parse('1. e4 e5 (1...c5 2. Nf3 Nc6) 2. f4 exf4 *');
+        result.moves.should.have.lengthOf(4);
+    });
+
     it('should allow whitespace after result', () => {
         const [result] = parser.parse('1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O d6 6. Re1 1-0 ');
         result.moves.should.have.lengthOf(11);

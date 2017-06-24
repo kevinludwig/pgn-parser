@@ -1,6 +1,6 @@
 {
   "name": "pgn-parser",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "pgn parser",
   "keywords": ["chess", "pgn", "parser", "pegjs"],
   "license": "MIT",
