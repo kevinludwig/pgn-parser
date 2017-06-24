@@ -48,7 +48,8 @@ game =
     whitespace* 
     m:movetext 
     whitespace+
-    r:result? {return make_game(h, c, m, r)}
+    r:result? 
+    whitespace* {return make_game(h, c, m, r)}
 
 double_quote = '"'
 string = double_quote str:[^"]* double_quote {return str.join('')}
