@@ -123,6 +123,11 @@ describe('grammar', () => {
         const [result] = parser.parse('1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O d6 6. Re1 1-0');
         result.moves.should.have.lengthOf(11);
     });
+    
+    it('should allow abandoned games (no moves)', () => {
+        const [result] = parser.parse('[Termination "Abandoned"]\n\n*');
+        result.moves.should.have.lengthOf(0);
+    });
 
     it('should allow multiple games in input', () => {
         const results = parser.parse('1. d4 d5 2. c4 c6 *\n1. e4 e5 2. d4 exd4 3. c3 dxc3 4. Bc4 cxb2 5. Bxb2 d6 1/2-1/2');

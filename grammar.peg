@@ -34,23 +34,22 @@
         return {
             headers: h.reduce(function(x, acc) {Object.assign(acc, x)}, {}),
             comment: c,
-            moves: m,
+            moves: m || [],
             result: r
         };
     }
 }
 
-start = gs:(game newline*)* {return gs.map(function(g) { return g[0]})}
+start = gs:(game newline*)* EOF {return gs.map(function(g) { return g[0]})}
 
 game = 
     h:headers? 
     c:comment? 
     whitespace* 
-    m:movetext 
-    whitespace+
-    r:result? 
-    whitespace* {return make_game(h, c, m, r)}
+    mr:(m:movetext whitespace+ r:result {return [m, r]} / r:result {return [null, r]}) 
+    whitespace* {return make_game(h, c, mr[0], mr[1])}
 
+EOF = !.
 double_quote = '"'
 string = double_quote str:[^"]* double_quote {return str.join('')}
 integer = a:[1-9] b:[0-9]* {return parseInt(a+b.join(''), 10)}
