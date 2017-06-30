@@ -32,7 +32,7 @@
     function make_game(h, c, m, r) {
         h = h || [];
         return {
-            headers: h.reduce(function(x, acc) {Object.assign(acc, x)}, {}),
+            headers: h.reduce((acc, x) => Object.assign(acc, x), {}),
             comment: c,
             moves: m || [],
             result: r
