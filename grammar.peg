@@ -75,13 +75,13 @@ promotion = "=" [QRBN]
 nag = chars:("$" integer) {return chars.join('')}
 nag_alts = "!!" / "??" / "!?" / "?!" / "!" / "?"
 continuation = period period period
-
+disambiguation = (rank file) / rank / file
 comment_chars = [^}]
 comment = "{" cc:comment_chars* "}" {return cc.join('');}
 
 pawn_half_move = (r:rank c:capture)? square promotion?
 piece_half_move = piece capture? square
-piece_disambiguation_half_move = piece (rank / file) capture? square
+piece_disambiguation_half_move = piece disambiguation capture? square
 castle_half_move = ("O-O-O" / "O-O")
 
 half_move = m:(continuation? 
