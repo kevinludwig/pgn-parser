@@ -2,13 +2,20 @@
   "name": "pgn-parser",
   "version": "0.0.11",
   "description": "pgn parser",
-  "keywords": ["chess", "pgn", "parser", "pegjs"],
+  "keywords": [
+    "chess",
+    "pgn",
+    "parser",
+    "pegjs"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/kevinludwig/pgn-parser.git"
   },
-  "engines": {"node": ">= 6.0.0"},
+  "engines": {
+    "node": ">= 6.0.0"
+  },
   "scripts": {
     "test": "mocha"
   },
@@ -17,7 +24,7 @@
     "pegjs": "^0.10.0"
   },
   "devDependencies": {
-    "chai": "^4.0.2",
-    "mocha": "^3.4.2"
+    "chai": "^4.2.0",
+    "mocha": "^3.5.3"
   }
 }
