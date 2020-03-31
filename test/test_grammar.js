@@ -135,4 +135,10 @@ describe('grammar', () => {
         results[0].moves.should.have.lengthOf(4);
         results[1].moves.should.have.lengthOf(10);
     });
+
+    it('should disambiguate both rank and file', () => {
+        const results = parser.parse('1. d4 d5 2. Nc3 Nf6 3. Ne4?? h6?? 4. Ng5?? a6?? 5. Ng5f3! 1/2-1/2');
+        results.should.have.lengthOf(1);
+        results[0].moves.should.have.lengthOf(9);
+    });
 });
