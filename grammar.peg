@@ -29,11 +29,12 @@
             result
         };
     }
-    function make_game(h, c, m, r) {
+    function make_game(c0, h, c1, m, r) {
         h = h || [];
         return {
+            comment_above_header: c0,
             headers: h.reduce((acc, x) => Object.assign(acc, x), {}),
-            comment: c,
+            comment: c1,
             moves: m || [],
             result: r
         };
@@ -43,11 +44,14 @@
 start = gs:(game newline*)* EOF {return gs.map(function(g) { return g[0]})}
 
 game = 
+    whitespace*
+    c0:comments?
+    whitespace*
     h:headers? 
-    c:comment? 
+    c1:comments? 
     whitespace* 
     mr:(m:movetext whitespace+ r:result {return [m, r]} / r:result {return [null, r]}) 
-    whitespace* {return make_game(h, c, mr[0], mr[1])}
+    whitespace* {return make_game(c0, h, c1, mr[0], mr[1])}
 
 EOF = !.
 double_quote = '"'
@@ -76,9 +80,12 @@ nag = chars:("$" integer) {return chars.join('')}
 nag_alts = "!!" / "??" / "!?" / "?!" / "!" / "?"
 continuation = period period period
 disambiguation = (rank file) / rank / file
-comment_chars = [^}]
-comment = "{" cc:comment_chars* "}" {return cc.join('');}
-
+multi_line_comment_chars = [^}]
+multi_line_comment = "{" cc:multi_line_comment_chars* "}" {return cc.join('');}
+single_line_comment_chars = [^\n]
+single_line_comment = ";" cc:single_line_comment_chars* newline {return cc.join('');}
+comment = multi_line_comment / single_line_comment
+comments = cs:comment+ {return cs;}
 pawn_half_move = (r:rank c:capture)? square promotion?
 piece_half_move = piece capture? square
 piece_disambiguation_half_move = piece disambiguation capture? square
