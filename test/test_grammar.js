@@ -141,4 +141,10 @@ describe('grammar', () => {
         results.should.have.lengthOf(1);
         results[0].moves.should.have.lengthOf(9);
     });
+
+    it('should allow single line comments', () => {
+        const results = parser.parse('; lead comment\n[SomeHeader "Value"]\n\n1. e4 e5 *');
+        results.should.have.lengthOf(1);
+        results[0].comment_above_header.should.have.lengthOf(1);
+    });
 });
