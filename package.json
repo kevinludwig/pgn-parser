@@ -20,7 +20,7 @@
     "test": "mocha",
     "dist": "webpack -p"
   },
-  "main": "dist/bundle.js",
+  "main": "dist/bundle.node.js",
   "dependencies": {},
   "devDependencies": {
     "pegjs": "^0.10.0",
