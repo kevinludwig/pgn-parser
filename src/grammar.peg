@@ -58,9 +58,14 @@ double_quote = '"'
 string = double_quote str:[^"]* double_quote {return str.join('')}
 integer = a:[1-9] b:[0-9]* {return parseInt(a+b.join(''), 10)}
 symbol = chars:[A-Za-z0-9_-]+ {return chars.join('')}
-ws = ' ' / '\f' / '\t'
+blank = ' '
+form_feed = '\f'
+tab = '\t'
+carriage_return = '\r'
+line_feed = '\n'
+ws = blank / form_feed / tab / carriage_return
 whitespace = ws / newline
-newline = '\n'
+newline = line_feed
 
 header = '[' hn:symbol ws+ hv:string ']' whitespace* { return make_header(hn,hv) }
 headers = hs:header+ {return hs}
