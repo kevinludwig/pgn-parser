@@ -6,18 +6,16 @@ Parse [PGN files](https://www.chessclub.com/user/help/PGN-spec) into a JS data s
 
 ### Usage
 
-From the command line: `pgn-parser.js some/pgn/file.pgn`
+From the command line: `src/pgn-parser.js some/pgn/file.pgn`
 
 From js
 
 ```
 const pgnParser = require('pgn-parser');
 
-pgnParser((err, parser) => {
-    const [result] = parser.parse('[White "me"]\n[Black "you"]\n1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 (3. ...Nf6 {is the two knights}) 4. b4 Bxb4 5. c3 Ba5 6. d4 exd4 7. O-O Nge7 $1 *');
-    console.log(result);
-});
+const [result] = pgnParser.parse('[White "me"]\n[Black "you"]\n1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 (3. ...Nf6 {is the two knights}) 4. b4 Bxb4 5. c3 Ba5 6. d4 exd4 7. O-O Nge7 $1 *');
 
+console.log(result);
 ```
 
 ### Output

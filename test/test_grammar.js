@@ -1,18 +1,10 @@
 const chai = require('chai'),
       path = require('path'),
       fs = require('fs'),
-      pgnParser = require('../index'),
+      parser = require('../dist/bundle.node'),
       should = chai.should();
 
 describe('grammar', () => {
-    let parser;
-    before((done) => {
-         pgnParser((err, p) => {
-            parser = p;
-            done();
-         });
-    });
-
     it('should parse basic movetext', () => {
         const [result] = parser.parse('1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qe3 Nf6 *');
         result.moves.should.have.lengthOf(8);
