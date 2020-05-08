@@ -2,10 +2,10 @@ const path = require('path'),
     {CleanWebpackPlugin} = require('clean-webpack-plugin'),
       TerserWebpackPlugin = require('terser-webpack-plugin');
 
-const buildTarget = (library, libraryExport, libraryTarget, filename) => ({
-    target: 'node',
-    mode: 'production',
+module.exports = {
+    mode: process.env['NODE_ENV'] === 'production' ? 'production' : 'development',
     entry: './src/index.js',
+    devtool: 'source-map',
     resolve: {
         mainFields: ['module', 'main'],
         modules: ['./src', './node_modules'],
@@ -13,10 +13,10 @@ const buildTarget = (library, libraryExport, libraryTarget, filename) => ({
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename,
-        libraryTarget,
-        libraryExport,
-        library
+        filename: 'pgn-parser.js',
+        library: 'pgnParser',
+        globalObject: 'this',
+        libraryTarget: 'umd'
     },
     module: {
         rules: [
@@ -41,11 +41,9 @@ const buildTarget = (library, libraryExport, libraryTarget, filename) => ({
                 sourceMap: true
             })
         ]
-    }
-});
-
-module.exports = [
-    buildTarget(undefined, 'default', 'commonjs2', 'bundle.node.js'),
-    buildTarget('PgnParser', undefined, 'var', 'bundle.js')
-];
+    },
+    plugins: [
+        new CleanWebpackPlugin()
+    ]
+};
 

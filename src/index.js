@@ -1,3 +1,5 @@
 import pegjs from 'pegjs';
 import grammar from './grammar.peg';
-export default pegjs.generate(grammar);
+const parser = pegjs.generate(grammar);
+
+export const parse = (s) => parser.parse(s);

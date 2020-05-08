@@ -1,6 +1,6 @@
 {
   "name": "pgn-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "pgn parser",
   "keywords": [
     "chess",
@@ -20,7 +20,7 @@
     "test": "mocha",
     "dist": "webpack -p"
   },
-  "main": "dist/bundle.node.js",
+  "main": "dist/pgn-parser.js",
   "dependencies": {},
   "devDependencies": {
     "pegjs": "^0.10.0",

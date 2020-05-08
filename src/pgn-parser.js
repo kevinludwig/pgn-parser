@@ -1,6 +1,6 @@
 #!/usr/local/bin/node
 const fs = require('fs'),
-      parser = require('../dist/bundle.node');
+      parser = require('../dist/pgn-parser');
 
 fs.readFile(process.argv[2], 'utf-8', (err, data) => {
     if (err) {
