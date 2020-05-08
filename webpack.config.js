@@ -16,7 +16,8 @@ module.exports = {
         filename: 'pgn-parser.js',
         library: 'pgnParser',
         globalObject: 'this',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     module: {
         rules: [
