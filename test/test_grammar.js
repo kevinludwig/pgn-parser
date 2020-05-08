@@ -1,7 +1,7 @@
 const chai = require('chai'),
       path = require('path'),
       fs = require('fs'),
-      parser = require('../dist/bundle.node'),
+      parser = require('../dist/pgn-parser'),
       should = chai.should();
 
 describe('grammar', () => {
