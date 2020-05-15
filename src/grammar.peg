@@ -94,9 +94,9 @@ command_comment = '{' whitespace* cs:command+ whitespace* '}' {return cs;}
 command = '[%' key:command_key whitespace+ values:command_values ']' {return {key, values};}
 command_key = k:[a-zA-Z]+ {return k.join('');}
 command_value = v:[^,\]]+ {return v.join('');}
-command_values = cv:command_value cvs:(',' command_value)* {return cvs ? [cv, ...flatten(cvs).filter(cv => cv !== ',')] : [cv];}
+command_values = first:command_value rest:(',' command_value)* {return rest ? [first, ...flatten(rest).filter(function (cv) { return cv !== ','})] : [first];}
 comment = c:(command_comment / multi_line_comment / single_line_comment) {return typeof c === 'string' ? {text: c} : {commands: c};}
-comments = cs:comment+ {return cs;}
+comments = (whitespace* cs:comment {return cs;})+
 
 pawn_half_move = (r:rank c:capture)? square promotion?
 piece_half_move = piece capture? square
