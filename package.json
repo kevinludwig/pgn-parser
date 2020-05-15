@@ -17,6 +17,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
+    "pretest": "npm run dist",
     "test": "mocha",
     "dist": "webpack -p"
   },
