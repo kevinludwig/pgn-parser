@@ -10,17 +10,18 @@
         return acc;
     }
     function make_header(hn,hv) {
-        var m = {};
-        m[hn] = hv;
-        return m;
+        return {
+            name: hn,
+            value: hv
+        };
     }
-    function make_move(move_number, move, nags, ravs, comment) {
+    function make_move(move_number, move, nags, ravs, comments) {
         var m = {};
         if (move_number) m.move_number = move_number;
         if (move) m.move = move;
         if (nags && nags.length) m.nags = nags;
         if (ravs && ravs.length) m.ravs = ravs;
-        if (comment) m.comment = comment;
+        if (comments) m.comments = comments;
         return m;
     }
     function make_rav(moves, result) {
@@ -29,12 +30,11 @@
             result
         };
     }
-    function make_game(c0, h, c1, m, r) {
-        h = h || [];
+    function make_game(c0, hs, c1, m, r) {
         return {
-            comment_above_header: c0,
-            headers: h.reduce((acc, x) => Object.assign(acc, x), {}),
-            comment: c1,
+            comments_above_header: c0,
+            headers: hs, 
+            comments: c1,
             moves: m || [],
             result: r
         };
@@ -85,12 +85,19 @@ nag = chars:("$" integer) {return chars.join('')}
 nag_alts = "!!" / "??" / "!?" / "?!" / "!" / "?"
 continuation = period period period
 disambiguation = (rank file) / rank / file
+
 multi_line_comment_chars = [^}]
 multi_line_comment = "{" cc:multi_line_comment_chars* "}" {return cc.join('');}
 single_line_comment_chars = [^\n]
 single_line_comment = ";" cc:single_line_comment_chars* newline {return cc.join('');}
-comment = multi_line_comment / single_line_comment
-comments = cs:comment+ {return cs;}
+command_comment = '{' whitespace* cs:command+ whitespace* '}' {return cs;}
+command = '[%' key:command_key whitespace+ values:command_values ']' {return {key, values};}
+command_key = k:[a-zA-Z]+ {return k.join('');}
+command_value = v:[^,\]]+ {return v.join('');}
+command_values = first:command_value rest:(',' command_value)* {return rest ? [first, ...flatten(rest).filter(function (cv) { return cv !== ','})] : [first];}
+comment = c:(command_comment / multi_line_comment / single_line_comment) {return typeof c === 'string' ? {text: c} : {commands: c};}
+comments = (whitespace* cs:comment {return cs;})+
+
 pawn_half_move = (r:rank c:capture)? square promotion?
 piece_half_move = piece capture? square
 piece_disambiguation_half_move = piece disambiguation capture? square
@@ -108,7 +115,7 @@ move = mn:move_number?
        whitespace*
        m:half_move 
        nags:(whitespace+ n:nag {return n})*
-       com:(whitespace+ c2:comment {return c2})? 
+       com:(whitespace+ c2:comment {return c2})* 
        ravs:(whitespace+ r:rav {return r})*
        {return make_move(mn, m, nags, ravs, com)}
 

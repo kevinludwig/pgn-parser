@@ -137,6 +137,22 @@ describe('grammar', () => {
     it('should allow single line comments', () => {
         const results = parser.parse('; lead comment\n[SomeHeader "Value"]\n\n1. e4 e5 *');
         results.should.have.lengthOf(1);
-        results[0].comment_above_header.should.have.lengthOf(1);
+        results[0].comments_above_header.should.have.lengthOf(1);
+        results[0].comments_above_header[0].text.should.be.eql(' lead comment');
+    });
+
+    it('should support multiple comments between half-moves', () => {
+        const results = parser.parse('1. e4 { this is a comment } { [%csl Gd5,Gf5][%cal Ge4d5,Ge4f5] } *');
+        results[0].moves.should.have.lengthOf(1);
+    });
+
+    it('should fully parse command commments', () => {
+        const results = parser.parse('1. e4 { this is a comment } { [%csl Gd5,Gf5][%cal Ge4d5,Ge4f5] } *');
+        results[0].moves.should.have.lengthOf(1);
+        results[0].moves[0].comments.should.have.lengthOf(2);
+        results[0].moves[0].comments[0].text.should.be.eql(' this is a comment ');
+        results[0].moves[0].comments[1].commands.should.have.lengthOf(2);
+        results[0].moves[0].comments[1].commands[0].key.should.be.eql('csl');
+        results[0].moves[0].comments[1].commands[0].values.should.be.eql(['Gd5', 'Gf5']);
     });
 });

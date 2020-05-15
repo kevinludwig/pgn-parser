@@ -1,6 +1,6 @@
 {
   "name": "pgn-parser",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "pgn parser",
   "keywords": [
     "chess",
@@ -17,6 +17,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
+    "pretest": "npm run dist",
     "test": "mocha",
     "dist": "webpack -p"
   },
