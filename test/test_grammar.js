@@ -138,6 +138,7 @@ describe('grammar', () => {
         const results = parser.parse('; lead comment\n[SomeHeader "Value"]\n\n1. e4 e5 *');
         results.should.have.lengthOf(1);
         results[0].comments_above_header.should.have.lengthOf(1);
+        results[0].comments_above_header[0].text.should.be.eql(' lead comment');
     });
 
     it('should support multiple comments between half-moves', () => {

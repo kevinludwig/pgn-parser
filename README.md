@@ -36,7 +36,7 @@ The result parsing the PGN above would be
             { move: 'Nf3', move_number: 2},
             { move: 'Nc6'},
             { move: 'Bc4', move_number: 3},
-            { move: 'Bc5', ravs: [{ moves: [{move_number: 3, move: "...Nf6", comments: ["is the two knights"]}]}]},
+            { move: 'Bc5', ravs: [{ moves: [{move_number: 3, move: "...Nf6", comments: [{text: "is the two knights"}]}]}]},
             { move: 'b4', move_number: 4},
             { move: 'Bxb4'},
             { move: 'c3', move_number: 5},
