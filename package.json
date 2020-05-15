@@ -19,7 +19,7 @@
   "scripts": {
     "pretest": "npm run dist",
     "test": "mocha",
-    "dist": "NODE_ENV=production webpack -p"
+    "dist": "webpack -p"
   },
   "main": "dist/pgn-parser.js",
   "dependencies": {},
