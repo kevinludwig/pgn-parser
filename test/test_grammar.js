@@ -155,4 +155,10 @@ describe('grammar', () => {
         results[0].moves[0].comments[1].commands[0].key.should.be.eql('csl');
         results[0].moves[0].comments[1].commands[0].values.should.be.eql(['Gd5', 'Gf5']);
     });
+
+    it('should parse accented characters', () => {
+        const results = parser.parse('1.e4 {A à E é I î O ô U ù Y} *');
+        results[0].moves[0].comments.should.have.lengthOf(1);
+        results[0].moves[0].comments[0].text.should.be.eql('A à E é I î O ô U ù Y');
+    });
 });
