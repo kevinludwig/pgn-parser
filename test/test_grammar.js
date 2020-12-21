@@ -94,6 +94,11 @@ describe('grammar', () => {
         const [result] = parser.parse('1. e4 (1. d4 d5) e5 2. d4 exd4 *');
         result.moves.should.have.lengthOf(4);
     });
+
+    it('should allow RAV without following whitespace', () => {
+        const [result] = parser.parse('1. e4 (1. d4 d5)e5 2. d4 exd4 *');
+        result.moves.should.have.lengthOf(4);
+    });
     
     it('should allow multiple RAV for same move', () => {
         const [result] = parser.parse('1. e4 (1. d4 d5) (1. c4 e5) e5 *');
