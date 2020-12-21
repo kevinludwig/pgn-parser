@@ -80,7 +80,7 @@ period = "."
 result = "1-0" / "0-1" / "*" / "1/2-1/2"
 move_number = mn:integer period? (period period)? {return mn}
 square = r:rank f:file {return r+f}
-promotion = "=" [QRBN]
+promotion = "="? [QRBN]
 nag = chars:("$" integer) {return chars.join('')}
 nag_alts = "!!" / "??" / "!?" / "?!" / "!" / "?"
 continuation = period period period

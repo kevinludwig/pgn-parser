@@ -105,6 +105,11 @@ describe('grammar', () => {
         result.moves.should.have.lengthOf(4);
     });
     
+    it('should allow promotion without equal sign', () => {
+        const [result] = parser.parse('1. e4 f5 2. exf5 g6 3. fxg6 h6 4. g7 Rh7 5. gxf8Q+ *');
+        result.moves.should.have.lengthOf(9);
+    });
+
     it('should allow multiple RAV for same move', () => {
         const [result] = parser.parse('1. e4 (1. d4 d5) (1. c4 e5) e5 *');
         result.moves.should.have.lengthOf(2);
