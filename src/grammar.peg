@@ -116,7 +116,7 @@ move = mn:move_number?
        m:half_move 
        nags:(whitespace+ n:nag {return n})*
        com:(whitespace+ c2:comment {return c2})* 
-       ravs:(whitespace+ r:rav {return r})*
+       ravs:(whitespace* r:rav {return r})*
        {return make_move(mn, m, nags, ravs, com)}
 
 movetext = first:move rest:(whitespace*move)* {return first ? [first].concat(rest.map(function(m) {return m[1]})) : []}
