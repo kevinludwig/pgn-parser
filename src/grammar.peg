@@ -119,7 +119,7 @@ move = mn:move_number?
        ravs:(whitespace* r:rav {return r})*
        {return make_move(mn, m, nags, ravs, com)}
 
-movetext = first:move rest:(whitespace*move)* {return first ? [first].concat(rest.map(function(m) {return m[1]})) : []}
+movetext = first:move rest:(whitespace* move)* {return first ? [first].concat(rest.map(function(m) {return m[1]})) : []}
 
 rav = "(" 
     whitespace* 
