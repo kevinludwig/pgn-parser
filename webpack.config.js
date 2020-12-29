@@ -37,9 +37,10 @@ module.exports = {
     optimization: {
         minimizer: [
             new TerserWebpackPlugin({
-                cache: true,
                 parallel: true,
-                sourceMap: true
+                terserOptions: {
+                    sourceMap: true
+                }
             })
         ]
     },
