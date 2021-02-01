@@ -71,8 +71,8 @@ header = '[' hn:symbol ws+ hv:string ']' whitespace* { return make_header(hn,hv)
 headers = hs:header+ {return hs}
 
 piece = [NKQRB]
-rank = [a-h]
-file = [1-8]
+rank = [a-h-]
+file = [1-8-]
 check = "+"
 checkmate = "#"
 capture = "x"
