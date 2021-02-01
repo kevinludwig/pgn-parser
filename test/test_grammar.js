@@ -5,7 +5,6 @@ const chai = require('chai'),
       should = chai.should();
 
 describe('grammar', () => {
-
     it('should parse basic movetext', () => {
         const [result] = parser.parse('1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qe3 Nf6 *');
         result.moves.should.have.lengthOf(8);
