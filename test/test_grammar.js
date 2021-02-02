@@ -176,4 +176,9 @@ describe('grammar', () => {
         results[0].moves[0].comments.should.have.lengthOf(1);
         results[0].moves[0].comments[0].text.should.be.eql('A à E é I î O ô U ù Y');
     });
+
+    it('should parse null moves', () => {
+        const [result] = parser.parse('[Event "Turkey Cup 2014"]\n[Site "Kemer TUR"]\n[Date "2014.02.02"]\n[Round "2.71"]\n[White "Subasi,Zeki"]\n[Black "Yuvarlak,U"]\n[Result "1/2-1/2"]\n[WhiteElo "1714"]\n[BlackElo "1850"]\n[ECO "C45"]\n[Opening "Scotch"]\n[Variation "Schmidt variation"]\n[WhiteFideId "6345433"]\n[BlackFideId "6305598"]\n[EventDate "2014.02.01"]\n1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nc3 Bb4 6. Nxc6 bxc6 7. Bd3 d5 8.\nO-O Bxc3 9. bxc3 dxe4 10. Qe2 O-O 11. Bxe4 Re8 12. f3 Bf5 13. Bg5 -- 14. Rad1\nQe7 15. Bxf6 Qxf6 16. Qc4 Rad8 17. Bxc6 1/2-1/2\n')
+        result.moves.should.have.lengthOf(33);
+    });
 });
