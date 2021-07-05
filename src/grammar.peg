@@ -24,8 +24,9 @@
         if (comments) m.comments = comments;
         return m;
     }
-    function make_rav(moves, result) {
+    function make_rav(comments, moves, result) {
         return {
+            comments: flatten(comments),
             moves, 
             result
         };
@@ -123,8 +124,10 @@ movetext = first:move rest:(whitespace* move)* {return first ? [first].concat(re
 
 rav = "(" 
     whitespace* 
+    c:comments*
+    whitespace* 
     m:movetext 
     whitespace* 
     r:result?
     whitespace*
-    ")" {return make_rav(m, r)}
+    ")" {return make_rav(c, m, r)}
