@@ -60,6 +60,15 @@ describe('grammar', () => {
         result.moves.should.have.lengthOf(6);
     });
 
+    it('should allow other NAG symbols like ±, ∓, ∞, etc...', () => {
+        const [result] = parser.parse(`
+            1. f3 e6± $1 ∓ ∞ □ = ⩲ ⩱ +- -+ ⨀ $4 ○ ⟳ ↑ → ⩳ ⇆ ⨁
+            2. g4! ? !! ?? !? ?! exf8=Q!!
+            0-1
+        `);
+        result.moves.should.have.lengthOf(4);
+    });
+
     it('should allow commentary', () => {
         const [result] = parser.parse('1. f3 {some comment} e5 {another comment} 2. g4 Qh4#\n0-1');
         result.moves.should.have.lengthOf(4);
