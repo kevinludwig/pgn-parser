@@ -82,7 +82,30 @@ move_number = mn:integer period? (period period)? {return mn}
 square = r:rank f:file {return r+f}
 promotion = "="? [QRBN]
 nag = chars:("$" integer) {return chars.join('')}
-nag_alts = "!!" / "??" / "!?" / "?!" / "!" / "?"
+nag_alts =
+    "!!" /
+    "??" /
+    "!?" /
+    "?!" /
+    "!" /
+    "?" /
+    "±" /
+    "∓" /
+    "∞" /
+    "□" /
+    "=" /
+    "⩲" /
+    "⩱" /
+    "+-" /
+    "-+" /
+    "⨀" /
+    "○" /
+    "⟳" /
+    "↑" /
+    "→" /
+    "⩳" /
+    "⇆" /
+    "⨁"
 continuation = period period period
 disambiguation = (rank file) / rank / file
 
@@ -108,13 +131,12 @@ half_move = m:(continuation?
      piece_disambiguation_half_move / 
      piece_half_move / 
      pawn_half_move) 
-    (check / checkmate)? 
-    nag_alts?) {return flatten(m).join('');}
+    (check / checkmate)?) {return flatten(m).join('');}
 
 move = mn:move_number? 
        whitespace*
        m:half_move 
-       nags:(whitespace+ n:nag {return n})*
+       nags:(whitespace* n:(nag / nag_alts) {return n})*
        com:(whitespace+ c2:comment {return c2})* 
        ravs:(whitespace* r:rav {return r})*
        {return make_move(mn, m, nags, ravs, com)}
