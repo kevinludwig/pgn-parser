@@ -1,6 +1,6 @@
 {
   "name": "pgn-parser",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "pgn parser",
   "keywords": [
     "chess",
@@ -24,9 +24,9 @@
   "main": "dist/pgn-parser.js",
   "dependencies": {},
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "clean-webpack-plugin": "^3.0.0",
-    "mocha": "^8.2.1",
+    "mocha": "^4.1.0",
     "pegjs": "^0.10.0",
     "raw-loader": "^4.0.2",
     "terser-webpack-plugin": "^5.0.3",
