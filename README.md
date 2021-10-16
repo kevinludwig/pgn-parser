@@ -32,7 +32,7 @@ The result parsing the PGN above would be
         result: "*",
         moves: [
             { move: 'e4', move_number: 1},
-            { move: 'e5',
+            { move: 'e5'},
             { move: 'Nf3', move_number: 2},
             { move: 'Nc6'},
             { move: 'Bc4', move_number: 3},
