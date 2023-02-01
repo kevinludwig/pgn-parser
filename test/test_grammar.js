@@ -186,4 +186,9 @@ describe('grammar', () => {
         const [result] = parser.parse('[Event "Turkey Cup 2014"]\n[Site "Kemer TUR"]\n[Date "2014.02.02"]\n[Round "2.71"]\n[White "Subasi,Zeki"]\n[Black "Yuvarlak,U"]\n[Result "1/2-1/2"]\n[WhiteElo "1714"]\n[BlackElo "1850"]\n[ECO "C45"]\n[Opening "Scotch"]\n[Variation "Schmidt variation"]\n[WhiteFideId "6345433"]\n[BlackFideId "6305598"]\n[EventDate "2014.02.01"]\n1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nc3 Bb4 6. Nxc6 bxc6 7. Bd3 d5 8.\nO-O Bxc3 9. bxc3 dxe4 10. Qe2 O-O 11. Bxe4 Re8 12. f3 Bf5 13. Bg5 -- 14. Rad1\nQe7 15. Bxf6 Qxf6 16. Qc4 Rad8 17. Bxc6 1/2-1/2\n')
         result.moves.should.have.lengthOf(33);
     });
+
+    it('should parse crazyhouse moves', () => {
+        const [result] = parser.parse('1. d4 e5 2. dxe5 d6 3. @d5 dxe5 4. e3 @d2+ 5. Ke2 dxc1=Q 6. Qxc1 B@f3+ 7. Kxf3 c6 8. dxc6 a6 9. c7 Nc6 (9... a5 10. cxd8=B a4 11. Bc4 a3 12. Qd1 Ra7 (12... f6 13. Q@f7#)) 10. cxd8=Q+ Nxd8 11. Bc4 @e2 (11... f6 12. Q@f7+) 1-0');
+        result.moves.should.have.lengthOf(22);
+    });
 });
