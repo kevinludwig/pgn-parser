@@ -64,10 +64,26 @@ describe('grammar', () => {
         const [result] = parser.parse('1. f3 {some comment} e5 {another comment} 2. g4 Qh4#\n0-1');
         result.moves.should.have.lengthOf(4);
     });
-    
+
+    it('should allow pre move commentary', () => {
+        const [result] = parser.parse('1. e4 (1. d4 d5) {pre move comment} e5 2. d4 exd4 *');
+        result.moves.should.have.lengthOf(4);
+        result.moves[1].comments_pre.should.have.lengthOf(1);
+        result.moves[1].comments_pre[0].text.should.be.eql('pre move comment');
+    });
+
     it('should allow start of game commentary', () => {
         const [result] = parser.parse('{start of game} 1. f3 e5 2. g4 Qh4#\n0-1');
         result.moves.should.have.lengthOf(4);
+        result.comments_above_header.should.have.lengthOf(1);
+        result.comments_above_header[0].text.should.be.eql('start of game');
+    });
+
+    it('should allow pre game commentary', () => {
+        const [result] = parser.parse('[Date "2023.09.13"]\n\n{pre game comment} 1. f3 e5 2. g4 Qh4#\n0-1');
+        result.moves.should.have.lengthOf(4);
+        result.comments.should.have.lengthOf(1);
+        result.comments[0].text.should.be.eql('pre game comment');
     });
 
     it('should allow disambiguation moves', () => {
