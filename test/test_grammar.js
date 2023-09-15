@@ -75,15 +75,15 @@ describe('grammar', () => {
     it('should allow start of game commentary', () => {
         const [result] = parser.parse('{start of game} 1. f3 e5 2. g4 Qh4#\n0-1');
         result.moves.should.have.lengthOf(4);
-        result.comments_above_header.should.have.lengthOf(1);
-        result.comments_above_header[0].text.should.be.eql('start of game');
+        result.comments_pre_head.should.have.lengthOf(1);
+        result.comments_pre_head[0].text.should.be.eql('start of game');
     });
 
     it('should allow pre game commentary', () => {
         const [result] = parser.parse('[Date "2023.09.13"]\n\n{pre game comment} 1. f3 e5 2. g4 Qh4#\n0-1');
         result.moves.should.have.lengthOf(4);
-        result.comments.should.have.lengthOf(1);
-        result.comments[0].text.should.be.eql('pre game comment');
+        result.comments_pre.should.have.lengthOf(1);
+        result.comments_pre[0].text.should.be.eql('pre game comment');
     });
 
     it('should allow disambiguation moves', () => {
@@ -173,8 +173,8 @@ describe('grammar', () => {
     it('should allow single line comments', () => {
         const results = parser.parse('; lead comment\n[SomeHeader "Value"]\n\n1. e4 e5 *');
         results.should.have.lengthOf(1);
-        results[0].comments_above_header.should.have.lengthOf(1);
-        results[0].comments_above_header[0].text.should.be.eql(' lead comment');
+        results[0].comments_pre_head.should.have.lengthOf(1);
+        results[0].comments_pre_head[0].text.should.be.eql(' lead comment');
     });
 
     it('should support multiple comments between half-moves', () => {

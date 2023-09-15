@@ -25,18 +25,16 @@
         if (comments_pre) m.comments_pre = comments_pre;
         return m;
     }
-    function make_rav(comments, moves, result) {
+    function make_rav(moves) {
         return {
-            comments: flatten(comments),
-            moves, 
-            result
+            moves
         };
     }
     function make_game(c0, hs, c1, m, r) {
         return {
-            comments_above_header: c0,
+            comments_pre_head: c0,
             headers: hs, 
-            comments: c1,
+            comments_pre: c1,
             moves: m || [],
             result: r
         };
@@ -126,11 +124,7 @@ move = comp:comments?
 movetext = first:move rest:(whitespace* move)* {return first ? [first].concat(rest.map(function(m) {return m[1]})) : []}
 
 rav = "(" 
-    whitespace* 
-    c:comments*
-    whitespace* 
-    m:movetext 
-    whitespace* 
-    r:result?
     whitespace*
-    ")" {return make_rav(c, m, r)}
+    m:movetext 
+    whitespace*
+    ")" {return make_rav(m)}
