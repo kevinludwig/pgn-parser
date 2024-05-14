@@ -78,7 +78,7 @@ check = "+"
 checkmate = "#"
 capture = "x"
 period = "."
-result = "1-0" / "0-1" / "*" / "1/2-1/2"
+result = "1-0" / "0-1" / "*" / "1/2-1/2" / "{0-1}" / "{1-0}" / "{1/2-1/2}"
 move_number = mn:integer period? (period period)? {return mn}
 square = r:rank f:file {return r+f}
 promotion = "="? [QRBN]
