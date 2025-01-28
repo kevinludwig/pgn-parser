@@ -13,6 +13,8 @@ describe('grammar', () => {
     it('should parse headers', () => {
         const [result] = parser.parse('[Event "LACC Botvinnik Open"]\n[White "Kasparov"]\n1. d4 d5 2. c4 c6 3. cxd5 cxd4 1/2-1/2');
         result.moves.should.have.lengthOf(6);
+        result.headers.should.have.lengthOf(2);
+        result.headers[0].name.should.be.eql("Event");
     });
 
     it('should allow no move numbers', () => {
