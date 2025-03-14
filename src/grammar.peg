@@ -105,6 +105,7 @@ piece_disambiguation_half_move = piece disambiguation capture? square
 castle_half_move = ("O-O-O" / "O-O")
 
 half_move = m:(continuation? 
+    whitespace*
     (castle_half_move / 
      piece_disambiguation_half_move / 
      piece_half_move / 
